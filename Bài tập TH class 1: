@@ -1,0 +1,134 @@
+package THLOP;
+import java.util.Scanner;
+public class student {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc=new Scanner(System.in);
+		   
+		
+		
+
+		// Lớp Student
+		class Student {
+		    private int ID;
+		    private String name;
+		    private int age;
+
+		    // Constructor
+		    public Student(int ID, String name, int age) {
+		        this.ID = ID;
+		        this.name = name;
+		        this.age = age;
+		    }
+
+		    // Getters và Setters
+		    public int getID() {
+		        return ID;
+		    }
+
+		    public void setID(int ID) {
+		        this.ID = ID;
+		    }
+
+		    public String getName() {
+		        return name;
+		    }
+
+		    public void setName(String name) {
+		        this.name = name;
+		    }
+
+		    public int getAge() {
+		        return age;
+		    }
+
+		    public void setAge(int age) {
+		        this.age = age;
+		    }
+
+		    // Phương thức nhập Student từ bàn phím
+		    public static Student inputStudent() {
+		        Scanner scanner = new Scanner(System.in);
+
+		        System.out.print("Nhập ID: ");
+		        int ID = scanner.nextInt();
+		        scanner.nextLine(); // Bỏ dòng mới còn sót lại
+
+		        System.out.print("Nhập tên: ");
+		        String name = scanner.nextLine();
+
+		        System.out.print("Nhập tuổi: ");
+		        int age = scanner.nextInt();
+
+		        return new Student(ID, name, age);
+		    }
+
+		    // Phương thức in thông tin Student
+		    public void display() {
+		        System.out.println("ID: " + ID + ", Tên: " + name + ", Tuổi: " + age);
+		    }
+		}
+
+		// Lớp StudentServices
+		class StudentServices {
+
+		    // Phương thức xuất thông tin 1 Student ra màn hình
+		    public void printSt(Student st) {
+		        if (st != null) {
+		            st.display();
+		        } else {
+		            System.out.println("Student không tồn tại!");
+		        }
+		    }
+
+		    // Phương thức tìm kiếm 1 Student theo ID
+		    public Student findStudentByID(Student[] students, int searchID) {
+		        for (Student student : students) {
+		            if (student != null && student.getID() == searchID) {
+		                return student;
+		            }
+		        }
+		        return null;
+		    }
+
+		    // Phương thức nhập mảng Student
+		    public Student[] inputStudents(int length) {
+		        Scanner scanner = new Scanner(System.in);
+		        Student[] students = new Student[length];
+
+		        for (int i = 0; i < length; i++) {
+		            System.out.println("Nhập thông tin Student thứ " + (i + 1) + ":");
+		            students[i] = Student.inputStudent();
+		        }
+		        return students;
+		    }
+		}
+
+		// Hàm Main
+		
+		        Scanner scanner = new Scanner(System.in);
+		        StudentServices studentServices = new StudentServices();
+
+		        // Tạo mảng 5 đối tượng Student
+		        System.out.println("Nhập thông tin 5 Student:");
+		        Student[] students = studentServices.inputStudents(5);
+
+		        // In ra tên của những Student có ID < 10
+		        System.out.println("Tên của những Student có ID < 10:");
+		        for (Student student : students) {
+		            if (student.getID() < 10) {
+		                System.out.println(student.getName());
+		            }
+		        }
+
+		        // Tìm kiếm Student theo ID
+		        System.out.print("Nhập ID để tìm kiếm: ");
+		        int searchID = scanner.nextInt();
+		        Student foundStudent = studentServices.findStudentByID(students, searchID);
+		        studentServices.printSt(foundStudent);
+		    }
+		}
+
+	
+
